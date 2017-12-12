@@ -1,4 +1,5 @@
 ﻿using System;
+using NuGet.Configuration;
 
 namespace console3
 {
@@ -6,7 +7,14 @@ namespace console3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var machineWideSettingsOnly = Settings.LoadDefaultSettings(
+                    root: null,
+                    configFileName: null,
+                    machineWideSettings: new XPlatMachineWideSetting());
+
+            var result = SettingsUtility.GetGlobalPackagesFolder(machineWideSettingsOnly);
+
+            Console.WriteLine(result);
         }
     }
 }
